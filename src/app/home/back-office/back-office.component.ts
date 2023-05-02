@@ -6,5 +6,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./back-office.component.css']
 })
 export class BackOfficeComponent {
-
+  status: "Admin" | "Agent" | "Client" = "Admin";
 }
