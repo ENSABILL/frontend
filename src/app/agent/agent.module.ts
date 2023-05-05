@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { AgentRoutingModule } from './agent-routing.module';
 import { AgentComponent } from './agent.component';
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -11,7 +12,8 @@ import { AgentComponent } from './agent.component';
   ],
   imports: [
     CommonModule,
-    AgentRoutingModule
+    AgentRoutingModule,
+    FormsModule
   ]
 })
 export class AgentModule { }
