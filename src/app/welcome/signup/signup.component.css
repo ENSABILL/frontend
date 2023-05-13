@@ -1,0 +1,36 @@
+.sign__up{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    width: 100%;
+    max-width: 98vw;
+
+}
+
+.sign__up__card{
+    max-width: 100%;
+    display: grid;
+    place-items: center;
+    width: 100%;
+}
+
+.new__client__form{
+    /* background-color: red; */
+    display: grid;
+    place-items: center;
+    position: relative;
+    right: 25%;
+}
+
+@media only screen and (max-width: 927px){
+	.new__client__form{
+        position: relative;
+        right: 0;
+    }
+
+    .sign__up__card{
+        width: 98vw !important;
+        box-shadow: none;
+    }
+}

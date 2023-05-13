@@ -1,0 +1,35 @@
+
+.new__file{
+    background-color: rgb(14, 14, 97);
+    color: white;
+    border-radius: 1rem;
+    padding: 0.2rem 1rem;
+    outline: none;
+    border: none;
+    width: max-content;
+    display: grid;
+    place-items: center;
+    font-size: medium;
+}
+
+
+/* width */
+::-webkit-scrollbar {
+    width: 6px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1;
+  }
+  
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #dbdde6;
+    border-radius: 1rem;
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #230f6d;
+  }

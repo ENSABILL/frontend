@@ -1,0 +1,13 @@
+form.new__client{
+    width: 100%;
+    max-width: 76%;
+    display: grid;
+}
+
+input{
+    border-radius: 0;
+}
+
+button{
+    border-radius: 0;
+}
