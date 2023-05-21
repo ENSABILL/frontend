@@ -7,10 +7,10 @@ const routes: Routes = [
     children: [
       { path: 'client', loadChildren: () => import('./client/client.module').then(m => m.ClientModule) }, 
       { path: 'agent', loadChildren: () => import('./agent/agent.module').then(m => m.AgentModule) }, 
-      { path: 'backOffice', loadChildren: () => import('./back-office/back-office.module').then(m => m.BackOfficeModule) }
+      { path: 'backOffice', loadChildren: () => import('./back-office/back-office.module').then(m => m.BackOfficeModule) },
+      { path: '**', loadChildren: () => import('./client/client.module').then(m => m.ClientModule) }, 
     ]
   }, 
-  
 ];
 
 @NgModule({

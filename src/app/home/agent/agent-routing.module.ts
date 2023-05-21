@@ -13,7 +13,19 @@ const routes: Routes = [
       { 
         path: 'newClient', 
         loadChildren: () => import('./new-client/new-client.module').then(m => m.NewClientModule) 
-      }
+      },
+      { 
+        path: 'agentHome', 
+        loadChildren: () => import('./agent-default/agent-default.module').then(m => m.AgentDefaultModule) 
+      },
+      { 
+        path: 'clientsRequests', 
+        loadChildren: () => import('./requests/requests.module').then(m => m.RequestsModule) 
+      },
+      { 
+        path: '**', 
+        loadChildren: () => import('./agent-default/agent-default.module').then(m => m.AgentDefaultModule) 
+      },
 
     ]
   }, 

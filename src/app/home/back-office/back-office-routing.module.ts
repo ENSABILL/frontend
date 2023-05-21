@@ -11,6 +11,7 @@ const routes: Routes = [
       { path: 'newAgent', loadChildren: () => import('./new-agent/new-agent.module').then(m => m.NewAgentModule) }, 
       { path: 'newClient', loadChildren: () => import('./new-client/new-client.module').then(m => m.NewClientModule) },
       { path: 'clientsRequests', loadChildren: () => import('./requests/requests.module').then(m => m.RequestsModule) }, 
+      { path: '**', loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule) }, 
     ]
   },
   
