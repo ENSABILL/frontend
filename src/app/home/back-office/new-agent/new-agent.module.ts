@@ -3,15 +3,19 @@ import { CommonModule } from '@angular/common';
 
 import { NewAgentRoutingModule } from './new-agent-routing.module';
 import { NewAgentComponent } from './new-agent.component';
+import { FormsModule } from '@angular/forms';
+import { PopupComponent } from 'src/app/components/utils/popup/popup.component';
 
 
 @NgModule({
   declarations: [
-    NewAgentComponent
+    NewAgentComponent,
   ],
   imports: [
     CommonModule,
-    NewAgentRoutingModule
+    NewAgentRoutingModule,
+    FormsModule,
+    PopupComponent
   ]
 })
 export class NewAgentModule { }

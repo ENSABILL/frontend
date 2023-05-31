@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { TestsRoutingModule } from './tests-routing.module';
 import { TestsComponent } from './tests.component';
+import { PopupComponent } from '../components/utils/popup/popup.component';
 
 
 @NgModule({
@@ -11,7 +12,8 @@ import { TestsComponent } from './tests.component';
   ],
   imports: [
     CommonModule,
-    TestsRoutingModule
+    TestsRoutingModule,
+    PopupComponent
   ]
 })
 export class TestsModule { }
