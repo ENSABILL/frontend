@@ -1,3 +1,3 @@
-const basUrl="http://localhost:8081";
+const basUrl="http://20.199.48.78";
 
 export default basUrl;
