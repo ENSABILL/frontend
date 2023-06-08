@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AuthService } from 'src/app/services/auth/auth.service';
 
 @Component({
   selector: 'app-back-office',
@@ -7,4 +8,5 @@ import { Component } from '@angular/core';
 })
 export class BackOfficeComponent {
   status: "Admin" | "Agent" | "Client" = "Admin";
+  constructor(public authService: AuthService){}
 }

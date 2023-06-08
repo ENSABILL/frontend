@@ -1,0 +1,37 @@
+<app-popup *ngIf="(adminService.loginSuccess | async) || ( adminService.isError | async)" 
+    [message]="(adminService.isError | async) ? 'Agency was added successfully' : 'Whoops something went wrong'"
+    title="Notification!"
+    (close)="adminService.closeSuccess($event);adminService.unsetError(false);"
+></app-popup>
+
+<span class="loader" *ngIf="adminService.loading | async"></span>
+
+<div class="h-full ml-14 mt-14 mb-10 md:ml-64">
+    <span class="loader" *ngIf="adminService.loading | async"></span>
+    <form class="grid gap-2 px-5 py-10" #newAgency="ngForm" (ngSubmit)="addAgency(newAgency)">
+        <div class="grid md:grid-cols-2 md:gap-6">
+            <div class="relative z-0 w-full mb-6 group">
+                <input name="name" [(ngModel)]="agency.name" type="text" id="floating_phone" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder="" required />
+                <label for="floating_phone" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Name</label>
+            </div>
+            <div class="relative z-0 w-full mb-6 group">
+                <input name="immId" [(ngModel)]="agency.immId" type="text" type="text" id="floating_company" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
+                <label for="floating_company" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">ImmId</label>
+            </div>
+        </div>
+        <div class="grid md:grid-cols-2 md:gap-6">
+            <div class="relative z-0 w-full mb-6 group">
+                <input  name="patentId" [(ngModel)]="agency.patentId" type="text"  id="floating_phone" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
+                <label for="floating_phone" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">PatendId</label>
+            </div>
+        </div>
+        <!-- <h2>Additional Docs</h2> -->
+        <!-- <div class="" *ngFor="let f of filesNumbers;">
+            <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="user_avatar">Document</label>
+            <input class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" aria-describedby="user_avatar_help" id="user_avatar" type="file">
+        </div> -->
+
+        <!-- <button class="new__file" (click)="addNewFile()" type="button">New File</button> -->
+        <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-3xl text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Submit</button>
+    </form>  
+</div>

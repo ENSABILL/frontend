@@ -19,16 +19,16 @@ const routes: Routes = [
         loadChildren: () => import('./agent-default/agent-default.module').then(m => m.AgentDefaultModule) 
       },
       { 
-        path: 'clientsRequests', 
-        loadChildren: () => import('./requests/requests.module').then(m => m.RequestsModule) 
-      },
+        path: 'changePassword', 
+        loadChildren: () => import('./change-password/change-password.module').then(m => m.ChangePasswordModule) 
+      }, 
       { 
         path: '**', 
         loadChildren: () => import('./agent-default/agent-default.module').then(m => m.AgentDefaultModule) 
       },
 
     ]
-  }, 
+  },
 ];
 
 @NgModule({

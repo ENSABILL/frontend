@@ -11,3 +11,7 @@ input{
 button{
     border-radius: 0;
 }
+
+.email{
+    margin-bottom: 1rem;
+}

@@ -1,37 +1,34 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AdminService } from 'src/app/services/admin/admin.service';
+import { AgencyService } from 'src/app/services/agency/agency.service';
 
 @Component({
   selector: 'app-new-agent',
   templateUrl: './new-agent.component.html',
   styleUrls: ['./new-agent.component.css']
 })
-export class NewAgentComponent {
-  success=false;
+export class NewAgentComponent implements OnInit{
   agent: {
     email: string,
     phoneNumber: string,
     username: string,
     firstName: string,
-    lastName: string
+    lastName: string,
+    agencyImmId: string
   }={
     email: "",
     phoneNumber: "",
     username: "",
     firstName: "",
-    lastName: ""
+    lastName: "",
+    agencyImmId: ""
   };
 
-  constructor(public adminService: AdminService, private router: Router){}
-
+  constructor(public adminService: AdminService, public agencyService: AgencyService){}
   ngOnInit(): void {
-    this.adminService.loginSuccess$.subscribe(success => {
-      if (success) {
-        this.success=true;
-      }
-    });
+    this.agencyService.getAllAgencies().subscribe();
   }
 
   addAgent(form: NgForm){
@@ -42,9 +39,5 @@ export class NewAgentComponent {
     }else{
       console.log("The form is not valid");
     }
-  }
-
-  toggleSuccess(b: boolean){
-    this.success=false;
   }
 }

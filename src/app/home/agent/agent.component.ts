@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { AuthService } from 'src/app/services/auth/auth.service';
 
 class User{
   public nom: string='';
@@ -26,7 +27,7 @@ class User{
 export class AgentComponent {
   public user: User= new User();
 
-  constructor(){};
+  constructor(public authService: AuthService){}
 
   onSubmit(registerForm: NgForm) {
     console.log(registerForm.form);

@@ -1,0 +1,51 @@
+<span class="loader" *ngIf="agencyService.loading | async"></span>
+
+<app-popup *ngIf="(agencyService.message| async)?.length!==0" 
+    [message]="(agencyService.isError | async) ? 'Service was added successfully' : 'Whoops something went wrong'"
+    title="Notification!"
+    (close)="agencyService.close();"
+></app-popup>
+
+<form (ngSubmit)="addService(ngForm)" #ngForm="ngForm" class="w-full max-w-md mx-auto h-full ml-14 mt-14 mb-10 md:ml-64 px-4 new__client">
+    <div class="grid-flow-row -mx-3 mb-6 px-8">
+        <div class="w-full md:w-1/2 mb-6 md:mb-0">
+          <div class="form-group">
+            <!-- <label for="inputType">Type of service</label>
+            <select class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="inputType" name="type" [(ngModel)]="service.type">
+              <option value="DONATION">DONATION</option>
+              <option value="FACTURE">FACTURE</option>
+              <option value="RECHARGE">RECHARGE</option>
+            </select> -->
+            <label for="countries" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-400">Select a service type</label>
+            <select name="type" [(ngModel)]="service.type" id="countries" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                <option value="DONATION">DONATION</option>
+                <option value="FACTURE">FACTURE</option>
+                <option value="RECHARGE">RECHARGE</option>
+            </select>
+
+            <label for="countries" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-400">Select the agency</label>
+            <select name="type" [(ngModel)]="service.agencyId" id="countries" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                <option *ngFor="let agency of agencyService.agencies | async" [value]="agency?.immId">{{agency?.name}}</option>
+            </select>
+
+            <div class="w-full">
+                <label for="productName" class="block text-gray-700 text-sm font-bold mb-2">Product Name</label>
+                <input  type="text" id="productName" name="productName" [(ngModel)]="service.productName" placeholder="Enter product name" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" />
+              </div>
+          </div>
+        </div>
+        <div class="products">
+            <div class="product" *ngFor="let p of service.products">{{p}}</div>
+        </div>
+        <div class="grid-flow-row -mx-3 mb-6">
+          </div>
+          <div class="">
+            <button (click)="addNewProduct()" type="button"  class="" style="padding: 0.3rem 1rem; color: aqua; background-color: red; border-radius: 1rem;">
+              New Product
+            </button>
+          </div>
+      </div>
+      <button type="submit" style="margin-left: 1rem; border-radius: 1rem;" class="bg-yellow-500 hover:bg-yellow-600 text-white font-light py-2 px-4 rounded transition-colors duration-300 ease-in-out">
+        Save Service
+      </button>
+</form>

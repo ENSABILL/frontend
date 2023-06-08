@@ -9,17 +9,9 @@ import { AdminService } from 'src/app/services/admin/admin.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
-  constructor(public adminService: AdminService, private router: Router){}
+  constructor(public adminService: AdminService){}
 
   user: {username: string, password: string} = { username: "", password: "" };
-
-  ngOnInit(): void {
-    this.adminService.loginSuccess$.subscribe(success => {
-      if (success) {
-        this.router.navigate(['/home', 'backOffice', 'newAgent']);
-      }
-    });
-  }
 
   onSubmit(form: NgForm) {
     if (form.valid) {

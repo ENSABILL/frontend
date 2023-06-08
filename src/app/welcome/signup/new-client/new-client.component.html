@@ -1,127 +1,62 @@
+<span class="loader" *ngIf="clientService.loading | async"></span>
+<app-popup *ngIf="clientService.message | async" [message]="(clientService.message | async) ?? 'Whoops'" (close)="clientService.close()"></app-popup>
+
+
 <form #registerForm="ngForm" (ngSubmit)="onSubmit(registerForm)" class="w-full max-w-md mx-auto h-full ml-14 mt-14 mb-10 md:ml-64 px-4 new__client">
-    <div class="flex items-center justify-center space-x-2">
-        <span class="h-px w-20 bg-gray-300"></span>
-        <span class="text-gray-400 font-normal">Informations personnelles</span>
-        <span class="h-px w-20 bg-gray-300"></span>
-    </div>
+  <div class="flex items-center justify-center space-x-2">
+      <span class="h-px w-20 bg-gray-300"></span>
+      <span class="text-gray-400 font-normal">Informations personnelles</span>
+      <span class="h-px w-20 bg-gray-300"></span>
+  </div>
 
 <!--Partie 1: les champs à remplir-->
 
-    <div class="flex flex-wrap -mx-3 mb-6">
-        <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-          <input type="text" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" placeholder="Nom*" name="nom" [(ngModel)]="user.nom"
-          required minlength="4"
-          #lastNameVar="ngModel"
-          [ngClass]="{'is-invalid':lastNameVar.touched && !lastNameVar.valid}">
-          <div class="invalid-feedback">
-            <span *ngIf="lastNameVar.errors?.['required']">Champs Obligatoire</span>
-            <span *ngIf="lastNameVar.errors?.['minlength']">Minimum 4 charactères</span>
-          </div>
+  <div class="flex flex-wrap -mx-3 mb-6">
+      <div class="w-full md:w-1/2 px-3" >
+        <input type="text" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500 email" placeholder="email" name="email" [(ngModel)]="user.email">
+      </div>
+      <div class="w-full md:w-1/2 px-3">
+        <input type="text" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" placeholder="phoneNumber(212612218950)" name="phoneNumber" [(ngModel)]="user.phoneNumber"
+        required minlength="3"
+        #firstNameVar="ngModel"
+        [ngClass]="{'is-invalid':firstNameVar.touched && !firstNameVar.valid}">
+        <div class="invalid-feedback">
+          <span *ngIf="firstNameVar.errors?.['required']">Champs Obligatoire</span>
+          <span *ngIf="firstNameVar.errors?.['minlength']">Minimum 3 charactères</span>
         </div>
-        <div class="w-full md:w-1/2 px-3">
-          <input type="text" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" placeholder="Prénom*" name="prenom" [(ngModel)]="user.prenom"
-          required minlength="3"
-          #firstNameVar="ngModel"
-          [ngClass]="{'is-invalid':firstNameVar.touched && !firstNameVar.valid}">
-          <div class="invalid-feedback">
-            <span *ngIf="firstNameVar.errors?.['required']">Champs Obligatoire</span>
-            <span *ngIf="firstNameVar.errors?.['minlength']">Minimum 3 charactères</span>
-          </div>
-        </div>
-    </div>
-
-    <div class="flex flex-wrap -mx-3 mb-6">
-        <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-          <input type="text" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" placeholder="Date de naissance" name="dateNaissance" [(ngModel)]="user.dateNaissance">
-        </div>
-        <div class="w-full md:w-1/2 px-3">
-          <input type="text" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" placeholder="Adresse" name="adresse" [(ngModel)]="user.adresse">
-        </div>
-    </div>
-
-    <div class="flex flex-wrap -mx-3 mb-6">
-        <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-            <div class="form-group">
-                <label for="inputpiece" >Pièce d'identité*</label>
-                <select  class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="inputpiece" name="pièceIdentité" [(ngModel)]="user.pieceIdentite">
-                <option>C.I.N</option>
-                <option>Passeport</option>
-                <option>carte de résidence</option>
-                </select>
-            </div>
-        </div>
-        <div class="w-full md:w-1/2 px-3">
-            <label for="">Numéro pièce d'identité</label>
-          <input type="text" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" placeholder="Numéro pièce d'identité*" name="numPIdentite" [(ngModel)]="user.numPIdentite">
-        </div>
-    </div>
-
-    <div class="flex flex-wrap -mx-3 mb-6">
-        <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-          <input type="email" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" placeholder="Email*" name="email" [(ngModel)]="user.email"
-          required email
-          #emailVar="ngModel"
-          [ngClass]="{'is-invalid':emailVar.touched && !emailVar.valid}">
-          <div class="invalid-feedback">
-            <span *ngIf="emailVar.errors?.['required']">Champs Obligatoire</span>
-            <span *ngIf="emailVar.errors?.['email']">Email invalid</span>
-          </div>
-        </div>
-        <div class="w-full md:w-1/2 px-3">
-          <input type="text" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" placeholder="Comfirmation Email" name="confirmEmail" [(ngModel)]="user.confirmEmail">
-        </div>
-    </div>
-
-    <div class="flex flex-wrap -mx-3 mb-6">
-        <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-          <input type="text" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" placeholder="Numéro de telephone*" name="numTel" [(ngModel)]="user.numTel">
-        </div>
-        <div class="w-full md:w-1/2 px-3">
-          <input type="text" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" placeholder="Numéro d'immatriculation au registre de commerce*" name="numImmatriculation" [(ngModel)]="user.numImmatriculation">
-        </div>
-    </div>
-
-    <div class="flex flex-wrap -mx-3 mb-6">
-        <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-          <input type="text" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" placeholder="Numéro de patente*" name="numPatente" [(ngModel)]="user.numPatente">
-        </div>
-        <div class="w-full md:w-1/2 px-3">
-          
-        </div>
-    </div>
-
-<!--Partie 2: fichier a inclure et la description-->
-
-    <div class="flex items-center justify-center space-x-2">
-        <span class="h-px w-20 bg-gray-300"></span>
-        <span class="text-gray-400 font-normal">Pièces jointes</span>
-        <span class="h-px w-20 bg-gray-300"></span>
-    </div>
-
-    <div class="flex flex-wrap -mx-3 mb-6">
-        <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-            <label for="Description">Description</label>
-            <textarea class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" rows="1" id="Description" name="description" [(ngModel)]="user.description"></textarea>
-        </div>
-        <div class="w-full md:w-1/2 px-3">
-            <div class="form-group">
-                <label for="ControlFile">Fichier</label>
-                <input type="file" class="form-control-file" id="ControlFile" name="controlFile" [(ngModel)]="user.controlFile">
-              </div>
-        </div>
-    </div>
-
-<!--Validation ou annulation-->
-
-  <div class="flex justify-end">
-    <button type="submit" class="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded mr-2">
-       Enregistrer
-    </button>
-
-    <button (click)="annuler()" class="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded">
-       Annuler
-    </button>
+      </div>
   </div>
 
+  <div class="flex flex-wrap -mx-3 mb-6">
+      <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+        <input type="text" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" placeholder="date de naissance(2000/02/02)" name="dateNaissance" [(ngModel)]="user.dob">
+      </div>
+      <div class="w-full md:w-1/2 px-3">
+        <input type="text" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" placeholder="cin(Y783457)" name="adresse" [(ngModel)]="user.cin">
+      </div>
+  </div>
 
+  <div class="flex flex-wrap -mx-3 mb-6">
+      <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+        <input type="text" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" placeholder="firstName(Snoop)" name="firstName" [(ngModel)]="user.firstName">
+      </div>
+      <div class="w-full md:w-1/2 px-3">
+        <input type="text" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" placeholder="lastName(Dog)" name="lastName" [(ngModel)]="user.lastName">
+      </div>
+  </div>
+
+  <div class="flex flex-wrap -mx-3 mb-6">
+      <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+        <input type="text" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" placeholder="username(NoClue)" name="username" [(ngModel)]="user.username">
+      </div>
+      <div class="w-full md:w-1/2 px-3">
+        
+      </div>
+  </div>
+
+<div class="flex justify-end">
+  <button type="submit" class="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded mr-2">
+     Submit
+  </button>
+</div>
 </form>
