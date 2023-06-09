@@ -9,9 +9,6 @@ import basUrl from 'src/config/vars';
   providedIn: 'root'
 })
 export class AdminService {
-  private createAgentEndpoint = `${basUrl}/api/v1/agent`;
-  private adminLoginEndpoint = `${basUrl}/api/v1/auth/login`; // Replace with your actual API URL
-
   private loading$ = new BehaviorSubject<boolean>(false);
   private errorMessage$ = new BehaviorSubject<string>('');
 
@@ -61,7 +58,7 @@ export class AdminService {
 
     this.loading$.next(true); // Set loading state to true
 
-    return this.http.post(this.adminLoginEndpoint, body).pipe(
+    return this.http.post(`${basUrl}/api/v1/auth/login`, body).pipe(
       tap((response: any) => {
         this.loading$.next(false); // Set loading state to false
         this.loginSuccess$.next(true); // Emit login success event
@@ -97,7 +94,7 @@ export class AdminService {
   }): Observable<any> {
     this.loading$.next(true); // Set loading state to true
     console.log({token: this.localStorageService.getItem("authAdminData")?.token});
-    return this.http.post(this.createAgentEndpoint, agent, { headers: new HttpHeaders({
+    return this.http.post(`${basUrl}/api/v1/agent`, agent, { headers: new HttpHeaders({
       Authorization: `Bearer ${this.localStorageService.getItem("authAdminData")?.token}`
     }) }).pipe(
       tap((response) => {

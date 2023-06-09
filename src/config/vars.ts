@@ -1,3 +1,3 @@
-const basUrl="http://20.199.48.78";
+const basUrl="https://ebankingappbackend.azurewebsites.net";
 
 export default basUrl;
